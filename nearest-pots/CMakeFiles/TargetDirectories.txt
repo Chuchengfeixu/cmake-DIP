@@ -1,3 +1,0 @@
-/home/dh/program/cmake/DIP/insert/nearest-pots/CMakeFiles/edit_cache.dir
-/home/dh/program/cmake/DIP/insert/nearest-pots/CMakeFiles/rebuild_cache.dir
-/home/dh/program/cmake/DIP/insert/nearest-pots/CMakeFiles/processing.dir

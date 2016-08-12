@@ -1,3 +1,0 @@
-/home/dh/program/cmake/DIP/insert/double/CMakeFiles/edit_cache.dir
-/home/dh/program/cmake/DIP/insert/double/CMakeFiles/rebuild_cache.dir
-/home/dh/program/cmake/DIP/insert/double/CMakeFiles/processing.dir

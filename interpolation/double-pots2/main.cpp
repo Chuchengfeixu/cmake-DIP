@@ -41,29 +41,41 @@ using namespace std;
 	
 	//创建矩阵
         Mat dst = Mat::zeros(nrow,ncol,CV_8UC3);  
-      	int X=0;
-	int Y=0;
+      	
+	float X=0,Y=0;
+	CvScalar a,b,c,d;
 
-	//最邻近内插
-	for ( int i = 0; i < nrow; i++)
+	//双线性内插
+	for ( int i = 0; i < nrow-1; i++)
 	{
-		for(int j = 0; j < ncol; j++)
+		for(int j = 0; j < ncol-1; j++)
 		{
 			X= cvRound ( i / (double)x );
 			Y= cvRound ( j / (double)x );
-			if( X < row && X >= 0 && Y >= 0 && Y <= col )
-			{	
-				dst.at<cv::Vec3b>(i,j)[0]=src.at<cv::Vec3b>(X,Y)[0];
-				dst.at<cv::Vec3b>(i,j)[1]=src.at<cv::Vec3b>(X,Y)[1];
-				dst.at<cv::Vec3b>(i,j)[2]=src.at<cv::Vec3b>(X,Y)[2];
+			float ux=(int)X,uy=(int)Y;
+			ux=abs(ux-X);uy=abs(uy-Y);
+			
+			if( X < row-1 && X >= 0 && Y >= 0 && Y < col-1 )
+			{
+		//取四个点
+			a = src.at<cv::Vec3b>((int)X,(int)Y);
+			b = src.at<cv::Vec3b>((int)X,(int)Y+1);
+			c = src.at<cv::Vec3b>((int)X+1,(int)Y);
+			d = src.at<cv::Vec3b>((int)X+1,(int)Y+1);
 			}
+		//系数相加为处理后的点值
+				dst.at<cv::Vec3b>(i,j)[0]=(a.val[0]*(1-ux)+c.val[0]*ux)*(1-uy)+(b.val[0]*(1-ux)+d.val[0]*ux)*uy;
+				dst.at<cv::Vec3b>(i,j)[1]=(a.val[1]*(1-ux)+c.val[1]*ux)*(1-uy)+(b.val[1]*(1-ux)+d.val[1]*ux)*uy;
+				dst.at<cv::Vec3b>(i,j)[2]=(a.val[2]*(1-ux)+c.val[2]*ux)*(1-uy)+(b.val[2]*(1-ux)+d.val[2]*ux)*uy;
+			
 		}
 	}        
 
 
       
         imshow("dst",dst);  
- 	imwrite("nearest.bmp",dst);
+      	imwrite("double.bmp",dst);
+
         waitKey(0);  
         return 0;  
     }  
