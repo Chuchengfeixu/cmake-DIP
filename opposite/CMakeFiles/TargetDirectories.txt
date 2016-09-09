@@ -1,3 +1,0 @@
-/home/dh/program/cmake/DIP/opposite/CMakeFiles/edit_cache.dir
-/home/dh/program/cmake/DIP/opposite/CMakeFiles/rebuild_cache.dir
-/home/dh/program/cmake/DIP/opposite/CMakeFiles/processing.dir
